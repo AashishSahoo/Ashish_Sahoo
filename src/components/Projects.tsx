@@ -1,103 +1,97 @@
-
 "use client";
-import React from "react";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 
+import { useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { GithubIcon } from "./icons";
+import { SectionHeading } from "./section-heading";
+import { projects } from "@/data/resume";
 
-const content = [
-  {
-    title: "Axiom Protect 2.0",
-    description:
-      "Contributed to the development of Axiom 2.0, a web-based application where I developed and optimized multiple pages to enhance user experience and overall performance. I improved reusable UI components to ensure responsiveness and usability across various devices. I efficiently integrated APIs, mapping complex data structures to the frontend interface. A major focus of the project involved working with React Leaflet, where I customized map markers, displayed dynamic radius overlays, and handled multiple geographic locations, including overlapping markers and clustered map views for enhanced visual clarity.",
-    tags: ["Internship Project", "React", "Javascript", "Material UI"],
+function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+  const ref = useRef<HTMLDivElement>(null);
 
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        <img
-          src="/images/img1.jpeg"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="Axiom Protect 2.0"
-          onClick={() => window.open("https://access.axiomprotect.com/AxiomProtect/NewRegister", "_blank")}
-          style={{ cursor: "pointer" }}
-        />
-      </div>
-    ),
-  },
-  {
-    title: "Veri5now",
-    description:
-      "Created multiple UI components for a single page using Next.js, TypeScript and Material UI. Fetched data from backend APIs and efficiently stored and managed state using Redux for consistent UI rendering.Performed end-to-end testing across the entire application to ensure functionality and reliability.",
-    tags: ["Internship Project", "Next JS", "Typescript", "Material UI"],
+  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
 
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-        <img
-          src="/images/img2.png"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="Veri5now"
-          onClick={() => window.open("https://app.veri5now.com/create-account", "_blank")}
-          style={{ cursor: "pointer" }}
-        />      </div>
-    ),
-  },
-
-  {
-    title: "Self Service Portal",
-    description:
-      "Developed and structured interactive, high-performance pages using Next.js and TypeScript. Enhanced UI/UX by refining visual elements for a clean, modern, and intuitive user experience. Integrated RESTful APIs to fetch dynamic data and implemented optimized state management for smooth and responsive interactions.",
-    tags: ["Internship Project", "Next JS", "Typescript", "Material UI"],
-
-    content: (
-      <div className="flex h-full w-full items-center justify-center text-white">
-        <img
-          src="/images/img1.jpeg"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="Self Service Portal"
-
-        />
-
-      </div>
-    ),
-  },
-
-  {
-    title: "Meal Mate",
-    description:
-      "Developed a full-stack food ordering application with role-based access control for Admin, Restaurant Owners, and Users, each with distinct permissions and workflows. Built a dynamic admin dashboard featuring sales analytics, top-performing items/restaurants, and monthly revenue tracking. Implemented secure restaurant onboarding, table booking, and Razorpay test-mode payments. Integrated a DeepSeek R1 AI chatbot using prompt engineering to deliver real-time, context-aware customer support. Designed and consumed RESTful APIs with robust authentication and authorization for smooth data operations and user management.",
-    tags: ["Personal Project", "MERN"],
-
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        <img
-          src="/images/img5.png"
-          width={300}
-          height={300}
-          className="h-full w-full object-cover"
-          alt="Meal Mate"
-          onClick={() => window.open("https://mm-frontend-amber-zeta.vercel.app/", "_blank")}
-          style={{ cursor: "pointer" }}
-        />
-      </div>
-    ),
-  },
-];
-export default function Projects() {
   return (
-    <>
-      <div className="w-full py-4">
+    <div
+      ref={ref}
+      onMouseMove={handleMove}
+      className="group relative overflow-hidden rounded-lg border border-line bg-panel transition-colors hover:border-cyan/30"
+      style={{ "--mx": "50%", "--my": "50%" } as React.CSSProperties}
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(280px circle at var(--mx) var(--my), rgba(57,225,212,0.10), transparent 70%)",
+        }}
+      />
 
-        <StickyScroll content={content} />
+      <div className="relative flex items-center justify-between border-b border-line px-4 py-2.5">
+        <span className="font-display text-xs text-fog">{project.file}</span>
+        <span className="font-display text-[10px] text-violet">{project.type}</span>
       </div>
 
-    </>
+      <div className="relative p-5">
+        <h3 className="font-display text-base text-paper">{project.title}</h3>
+        <p className="mt-2 text-[14px] leading-6 text-fog">{project.description}</p>
 
+        <ul className="mt-4 space-y-2">
+          {project.points.map((point, i) => (
+            <li key={i} className="flex gap-2 text-[13.5px] leading-6 text-fog">
+              <span className="mt-[2px] text-cyan">›</span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-md border border-line-soft bg-panel-2 px-2 py-1 font-display text-[10.5px] text-fog"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-6 flex items-center gap-4">
+          <a
+            href={project.liveUrl}
+            className="inline-flex items-center gap-1.5 font-display text-xs text-cyan hover:underline"
+          >
+            live demo <ArrowUpRight size={13} />
+          </a>
+          <a
+            href={project.codeUrl}
+            className="inline-flex items-center gap-1.5 font-display text-xs text-fog hover:text-paper"
+          >
+            <GithubIcon width={13} height={13} /> source
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
+export function Projects() {
+  return (
+    <section id="projects" className="relative px-6 py-24">
+      <div className="mx-auto max-w-4xl">
+        <SectionHeading index="04" tag="projects" title="Things I've shipped" />
 
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

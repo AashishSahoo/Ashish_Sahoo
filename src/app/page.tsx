@@ -1,43 +1,25 @@
-import { Certificate } from "@/components/Certificate";
-import { Education } from "@/components/Education";
-import Footer from "@/components/Footer";
-import HeroSection from "@/components/HeroSection";
-import Projects from "@/components/Projects";
-import { SpotlightContainer } from "@/components/SpotlightContainer";
-import { TechStack } from "@/components/TechStack";
-import Contact from "@/components/Contact";
-
+import { Navbar } from "@/components/navbar";
+import { Hero } from "@/components/hero";
+import { About } from "@/components/about";
+import { Skills } from "@/components/skills";
+import { Experience } from "@/components/experience";
+import { Projects } from "@/components/projects";
+import { Education } from "@/components/education";
+import { Contact } from "@/components/contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black/[0.96] antialiased bg-grid-white/[0.02">
-      <div id="home">
-        <HeroSection />
-      </div>
-      <div id="about">
-        <SpotlightContainer />
-      </div>
-      <div id="project">
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
         <Projects />
-      </div>
-      <div id="education">
         <Education />
-      </div>
-      <div id="techstack">
-        <TechStack />
-      </div>
-      <div id="certification">
-        <Certificate />
-      </div>
-      <div id="contact">
         <Contact />
-      </div>
-      <div id="footer">
-        <Footer />
-      </div>
-
-    </main>
-
+      </main>
+    </>
   );
 }
-

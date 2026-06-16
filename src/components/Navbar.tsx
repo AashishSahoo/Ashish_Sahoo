@@ -1,81 +1,53 @@
+"use client";
 
+import { useEffect, useState } from "react";
+import { nav } from "@/data/resume";
 
-'use client';
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
 
-import React from "react";
-import { FloatingDock } from "@/components/ui/floating-dock";
-
-import { Icon } from '@iconify/react';
-
-export default function Navbar() {
-  const links = [
-    {
-      title: "Home",
-      icon: (
-        <Icon icon="iconamoon:home-bold" width="24" height="24" />
-      ),
-      href: "#home",
-    },
-    {
-      title: "About Me",
-      icon: (
-        <Icon icon="streamline-logos:about-me-logo-block" width="24" height="24" />
-
-      ),
-      href: "#about",
-    },
-    {
-      title: "Projects",
-      icon: (
-        <Icon icon="carbon:ibm-cloud-projects" width="24" height="24" />
-      ),
-      href: "#project",
-    },
-    {
-      title: "Education",
-      icon: (
-        <Icon icon="tdesign:education-filled" width="24" height="24" />),
-      href: "#education",
-    },
-    {
-      title: "Tech Stack",
-      icon: (
-        <Icon icon="ri:stack-fill" width="24" height="24" />
-      ),
-      href: "#techstack",
-    },
-    {
-      title: "Certificates",
-      icon: (
-        <Icon icon="grommet-icons:certificate" width="24" height="24" />),
-      href: "#certification",
-    },
-    {
-      title: "Contact",
-      icon: (
-        <Icon icon="fluent-mdl2:edit-contact" width="24" height="24" />),
-      href: "#contact",
-    },
-    {
-      title: "GitHub",
-      icon: (
-        <Icon icon="line-md:github-twotone" width="24" height="24" />),
-      href: "https://github.com/AashishSahoo",
-    },
-    {
-      title: "LinkedIN",
-      icon: (
-        <Icon icon="bi:linkedin" width="24" height="24" />),
-      href: "https://www.linkedin.com/in/ashishsahoo899/",
-    },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className="flex items-center justify-center h-[8rem] w-full" >
-      <FloatingDock
-        mobileClassName="fixed bottom-6 right-6"
-        items={links}
-      />
-    </div>
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
+      <nav
+        className={
+          "flex w-full max-w-3xl items-center justify-between rounded-full border px-4 py-2.5 transition-colors " +
+          (scrolled
+            ? "border-line bg-panel/80 backdrop-blur-md"
+            : "border-transparent bg-transparent")
+        }
+      >
+        <a
+          href="#top"
+          className="font-display text-sm tracking-tight text-paper hover:text-cyan transition-colors"
+        >
+          {"<AS />"}
+        </a>
+        <ul className="hidden sm:flex items-center gap-6">
+          {nav.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className="font-display text-xs text-fog hover:text-cyan transition-colors"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a
+          href="#contact"
+          className="font-display text-xs rounded-full border border-cyan/40 px-3.5 py-1.5 text-cyan hover:bg-cyan/10 transition-colors"
+        >
+          contact
+        </a>
+      </nav>
+    </header>
   );
 }

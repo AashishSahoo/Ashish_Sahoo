@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ashish Sahoo — Portfolio
 
-## Getting Started
+A Next.js 16 + TypeScript + Tailwind CSS portfolio, built in an Aceternity-UI-inspired
+dark "terminal" style: a typed-out terminal hero, a mouse-tracking spotlight glow,
+a bento grid for skills, a git-log-style experience timeline, and hover-glow
+project cards.
 
-First, run the development server:
+## Run it locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Edit your content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything — name, bio, skills, experience, projects, education, certifications,
+links — lives in one file:
 
-## Learn More
+```
+src/data/resume.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+Edit that file and the whole site updates. Two things to update before you ship it:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `profile.github` and `profile.linkedin` are placeholders (`#`) — set them to
+  your real profile URLs.
+- `projects[].liveUrl` / `projects[].codeUrl` are placeholders — point them at
+  your deployed demos and GitHub repos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+```
+src/
+  app/            root layout, global styles, page assembly
+  components/     one file per section (hero, skills, experience, projects, ...)
+  data/resume.ts  all content — the only file you usually need to touch
+  lib/utils.ts    small className-merging helper
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is a standard Next.js app — deploys cleanly to Vercel:
+
+```bash
+npx vercel
+```
+
+or any host that supports Next.js (Render, Railway, your own Node server via
+`npm run build && npm run start`).
