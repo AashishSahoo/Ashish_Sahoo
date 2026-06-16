@@ -1,12 +1,11 @@
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/about";
 import { Skills } from "@/components/skills";
 import { Experience } from "@/components/experience";
-import { Projects } from "@/components/projects";
-import { Education } from "@/components/education";
-import { Contact } from "@/components/contact";
-
+import { Projects } from "@/components/Projects";
+import { Education } from "@/components/Education";
+import { Contact } from "@/components/Contact";
 export default function Home() {
   return (
     <>
