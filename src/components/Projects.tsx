@@ -34,9 +34,19 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
 
       <div className="relative flex items-center justify-between border-b border-line px-4 py-2.5">
         <span className="font-display text-xs text-fog">{project.file}</span>
-        <span className="font-display text-[10px] text-violet">{project.type}</span>
-      </div>
 
+        <div className="flex items-center gap-2">
+          {project.type === "Freelance Project" && (
+            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-display text-emerald-400">
+              Freelance
+            </span>
+          )}
+
+          <span className="font-display text-[10px] text-violet">
+            {project.type}
+          </span>
+        </div>
+      </div>
       <div className="relative p-5">
         <h3 className="font-display text-base text-paper">{project.title}</h3>
         <p className="mt-2 text-[14px] leading-6 text-fog">{project.description}</p>
@@ -62,18 +72,28 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
         </div>
 
         <div className="mt-6 flex items-center gap-4">
-          <a
-            href={project.liveUrl}
-            className="inline-flex items-center gap-1.5 font-display text-xs text-cyan hover:underline"
-          >
-            live demo <ArrowUpRight size={13} />
-          </a>
-          <a
-            href={project.codeUrl}
-            className="inline-flex items-center gap-1.5 font-display text-xs text-fog hover:text-paper"
-          >
-            <GithubIcon width={13} height={13} /> source
-          </a>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-display text-xs text-cyan hover:underline"
+            >
+              Live Demo <ArrowUpRight size={13} />
+            </a>
+          )}
+
+          {project.codeUrl && (
+            <a
+              href={project.codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-display text-xs text-fog hover:text-paper"
+            >
+              <GithubIcon width={13} height={13} />
+              Source
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -154,7 +154,24 @@ export const projects = [
     ],
     tags: ["React", "PWA", "Node.js", "MongoDB", "LLM API", "CSV Ingestion"],
     liveUrl: "https://finoapp-frontend-red.vercel.app/",
-    codeUrl: "#",
+    codeUrl: "",
+  },
+  {
+    id: "fitness-quiz",
+    file: "fitness-quiz-app.jsx",
+    title: "Fitness Quiz Application",
+    type: "Freelance Project",
+    description:
+      "A custom fitness assessment platform built for a freelance client, helping users evaluate their fitness goals and receive personalized recommendations through an interactive quiz experience.",
+    points: [
+      "Developed a responsive multi-step quiz flow with seamless navigation and progress tracking.",
+      "Implemented dynamic result generation based on user responses and fitness objectives.",
+      "Optimized the application for mobile devices, ensuring a smooth experience across all screen sizes.",
+      "Delivered a production-ready solution tailored to client requirements and branding.",
+    ],
+    tags: ["React", "JavaScript", "Material UI", "Vercel"],
+    liveUrl: "https://fitness-quiz-app.vercel.app/",
+    codeUrl: "https://github.com/AashishSahoo/Fitness-Quiz-App",
   },
 ];
 
